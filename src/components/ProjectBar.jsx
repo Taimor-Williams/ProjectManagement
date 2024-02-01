@@ -4,9 +4,11 @@ import DefaultFunction from "./DeafultProject";
 import DefaultProject from "./DeafultProject";
 import AddProject from "./AddProject";
 
+const projectInitialState = [{Title: "death", Description: "the sun is killing my buzz", Date: "11-20-2023", Tasks: []},
+{Title: "life", Description: "", Date: "", Tasks: []}]    
+
 export default function ProjectBar({}){
-    const projectInitialState = [{Title: "death", Description: "the sun is killing my buzz", Date: "11-20-2023", Tasks: []},
-    {Title: "life", Description: "", Date: ""}]       
+   
     const [projectList,setProjectList] = useState(projectInitialState)
     function handleAddProjectClick(buttonName){
         setSelectedProject(buttonName)
@@ -22,7 +24,7 @@ export default function ProjectBar({}){
     function handleAddProjectSave(title,description,date){
         setProjectList((prevList) => [
             ...prevList,
-            { Title: title, Description: description, Date: date },
+            { Title: title, Description: description, Date: date, Tasks: [] },
           ]);
         setSelectedProject(title)
     }
@@ -58,7 +60,9 @@ export default function ProjectBar({}){
                         title={project.Title}
                         description={project.Description}
                         date={project.Date}
-                        Tasks = {project.Tasks}
+                        taskList={project.Tasks}
+                        handleUpdateState = {setProjectList}
+                        index = {index}
                         />
                     ) : null
                 )}
